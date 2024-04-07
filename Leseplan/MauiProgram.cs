@@ -1,5 +1,7 @@
 ﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
+using Plugin.Maui.DebugRainbows;
+
 
 namespace Leseplan;
 
@@ -11,6 +13,8 @@ public static class MauiProgram
 		builder
 			.UseMauiApp<App>()
             .UseMauiCommunityToolkit()
+			// Rainbows debuger, only enable to Debug
+			// .UseDebugRainbows()
             .ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("OpenSans-Light.ttf", "OpenSansLight");
@@ -30,6 +34,8 @@ public static class MauiProgram
 
 		builder.Services.AddSingleton<CatechismPage>();
 		builder.Services.AddSingleton<CatechismViewModel>();
+
+		builder.Services.AddSingleton<DatabaseRepository>();
 
 
 		return builder.Build();

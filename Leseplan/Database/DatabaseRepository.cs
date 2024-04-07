@@ -4,7 +4,7 @@ namespace Leseplan.Database;
 
 public class DatabaseRepository
 {
-    static SQLiteAsyncConnection db;
+    private static SQLiteAsyncConnection db;
 
     public DatabaseRepository()
     {

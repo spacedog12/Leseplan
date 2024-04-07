@@ -5,7 +5,7 @@ namespace Leseplan.Model;
 [Table("Bible")]
 public class BiblePlan
 {
-    [PrimaryKey, AutoIncrement, Column("Id")]
+    [PrimaryKey, AutoIncrement, Column("id")]
     public int Id { get; set; }
 
     [Column("day")]

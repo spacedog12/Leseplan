@@ -9,6 +9,7 @@ public partial class CatechismViewModel : BaseViewModel
     public CatechismViewModel(DatabaseRepository dbRepo)
     {
         this.dbRepo = dbRepo;
+        _ = GetCatechismPassagesAsync();
     }
 
     [ObservableProperty]
@@ -23,7 +24,7 @@ public partial class CatechismViewModel : BaseViewModel
         try
         {
             IsBusy = true;
-            await Task.Delay(2000);
+            // await Task.Delay(2000);
 
             var passages = await dbRepo.GetCatechismPassages();
 

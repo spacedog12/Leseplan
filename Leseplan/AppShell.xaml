@@ -51,7 +51,8 @@
                 Icon="book_pages_fill_large.png">
         <ShellContent Title="Katechismus"
                       ContentTemplate="{DataTemplate local:CatechismPage}"
-                      Route="CatechismPage"/>
+                      Route="CatechismPage"
+                      />
 
     </FlyoutItem>
 

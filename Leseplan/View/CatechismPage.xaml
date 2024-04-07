@@ -7,23 +7,39 @@
              x:Class="Leseplan.View.CatechismPage"
              Title="CatechismPage">
 
-    <Grid ColumnDefinitions="*, *"
-          ColumnSpacing="5"
-          RowDefinitions="*, *"
-          RowSpacing="0">
 
+    <Grid RowDefinitions="*"
+          ColumnDefinitions="*"
+          Padding="0">
         <CollectionView BackgroundColor="Transparent"
-                    ItemsSource="{Binding CatechismPassages}"
-                    SelectionMode="None"
-                    EmptyView="Empty">
+                        ItemsSource="{Binding CatechismPassages}"
+                        SelectionMode="None">
+
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="model:CatechismPlan">
-                    <Grid Padding="10">
-                        <Border HeightRequest="125"
-                            Padding="0"
-                            Style="{StaticResource ListView}">
-                            <Label Text="{Binding CatechismPassage}"/>
+                    <Grid Padding="5">
+                        <Border HeightRequest="70"
+                                Padding="0"
+                                Style="{StaticResource ListView}">
+                            <Border.Shadow>
+                                <Shadow Brush="{StaticResource Gray900Brush}"
+                                        Radius="{OnPlatform Android=13, Default=5}"
+                                        Opacity="{OnPlatform Android=0.25, Default=0.15}" />
 
+                            </Border.Shadow>
+                            <Grid ColumnDefinitions="*, *"
+                                  RowDefinitions="*, *"
+                                  Margin="20, 0, 5, 0">
+                                <Label Text="{Binding CatechismId}"
+                                       Grid.Row="0"
+                                       Grid.Column="0"/>
+                                <Label Text="{Binding CatechismPassage}"
+                                       Grid.Row="1"
+                                       Grid.Column="0"/>
+                                <Label Text="{Binding CatechismRead}"
+                                       Grid.Column="1"/>
+
+                            </Grid>
                         </Border>
 
                     </Grid>
@@ -34,19 +50,13 @@
 
         </CollectionView>
 
-        <Button Text="Get Passages"
-                Command="{Binding GetCatechismPassagesCommand}"
-                IsEnabled="{Binding IsNotBusy}"
-                Grid.Row="1"
-                Grid.Column="1"
-                Margin="8"/>
-
         <ActivityIndicator IsVisible="{Binding IsBusy}"
                            IsRunning="{Binding IsBusy}"
+                           HeightRequest="50"
                            HorizontalOptions="FillAndExpand"
                            VerticalOptions="CenterAndExpand"
-                           Grid.RowSpan="2"
-                           Grid.ColumnSpan="2" />
+                           Grid.ColumnSpan="1"
+                           Grid.RowSpan="1"/>
 
     </Grid>
 </ContentPage>

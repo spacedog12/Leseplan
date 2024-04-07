@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<?xaml-comp compile="true" ?>
+<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <Style TargetType="Page" ApplyToDerivedTypes="True">
+        <Setter Property="BackgroundColor" Value="{StaticResource LightBackground}" />
+
+    </Style>
+
+    <Style TargetType="NavigationPage" ApplyToDerivedTypes="True">
+        <Setter Property="BackgroundColor" Value="{StaticResource LightBackground}" />
+        <Setter Property="BarBackgroundColor" Value="{StaticResource Primary}" />
+        <Setter Property="BarTextColor" Value="{StaticResource WhiteColor}" />
+
+    </Style>
+
+    <Style TargetType="Label" x:Key="BaseLabel">
+        <Setter Property="FontFamily" Value="OpenSansLight" />
+        <Setter Property="TextColor" Value="{StaticResource LabelText}" />
+
+    </Style>
+
+    <Style TargetType="Label" x:Key="MicroLabel" BasedOn="{StaticResource BaseLabel}">
+        <Setter Property="FontSize" Value="10" />
+
+    </Style>
+
+    <Style TargetType="Label" x:Key="SmallLabel" BasedOn="{StaticResource BaseLabel}">
+        <Setter Property="FontSize" Value="14" />
+
+    </Style>
+
+    <Style TargetType="Label" x:Key="MediumLabel" BasedOn="{StaticResource BaseLabel}">
+        <Setter Property="FontSize" Value="16" />
+
+    </Style>
+
+    <Style TargetType="Label" x:Key="MediumLargeLabel" BasedOn="{StaticResource BaseLabel}">
+        <Setter Property="FontSize" Value="18" />
+
+    </Style>
+
+    <Style TargetType="Label" x:Key="LargeLabel" BasedOn="{StaticResource BaseLabel}">
+        <Setter Property="FontSize" Value="20" />
+
+    </Style>
+
+    <Style TargetType="Label" x:Key="MenuHeaderLabel" BasedOn="{StaticResource BaseLabel}">
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="TextColor" Value="{StaticResource WhiteColor}" />
+
+    </Style>
+
+    <Style TargetType="Border" x:Key="BaseBorder">
+        <Setter Property="Stroke" Value="{StaticResource WhiteColor}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource WhiteColor}" />
+
+    </Style>
+    <Style TargetType="Border" x:Key="CardView" BasedOn="{StaticResource BaseBorder}">
+        <Setter Property="StrokeThickness" Value="{OnPlatform Android=0.5, Default=0.1}" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 20" />
+        <Setter Property="Shadow.Brush" Value="{StaticResource Gray900Brush}" />
+        <Setter Property="Shadow.Radius" Value="5" />
+        <Setter Property="Shadow.Opacity" Value=".1" />
+    </Style>
+
+    <Style TargetType="Border" x:Key="ImageView" BasedOn="{StaticResource BaseBorder}">
+        <Setter Property="StrokeThickness" Value="0" />
+
+    </Style>
+
+    <Style TargetType="Border" x:Key="StatusView">
+        <Setter Property="StrokeShape" Value="RoundRectangle 20" />
+        <Setter Property="BackgroundColor" Value="{StaticResource OpenTag}" />
+
+    </Style>
+
+    <Style TargetType="Border" x:Key="ListView" BasedOn="{StaticResource BaseBorder}">
+        <Setter Property="StrokeThickness" Value="{OnPlatform Android=0.5, Default=0.1}" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 20" />
+        <Setter Property="Shadow.Brush" Value="{StaticResource Gray900Brush}" />
+        <Setter Property="Shadow.Radius" Value="5" />
+        <Setter Property="Shadow.Opacity" Value=".1" />
+
+    </Style>
+
+    <Style TargetType="Shell" ApplyToDerivedTypes="True">
+        <Setter Property="Shell.BackgroundColor" Value="{StaticResource Primary}" />
+        <Setter Property="Shell.ForegroundColor" Value="{StaticResource WhiteColor}" />
+        <Setter Property="Shell.TitleColor" Value="{StaticResource WhiteColor}" />
+        <Setter Property="Shell.DisabledColor" Value="{StaticResource Gray200}" />
+        <Setter Property="Shell.UnselectedColor" Value="{StaticResource Gray200}" />
+        <Setter Property="Shell.NavBarHasShadow" Value="False" />
+        <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource WhiteColor}" />
+        <Setter Property="Shell.TabBarForegroundColor" Value="{StaticResource Primary}" />
+        <Setter Property="Shell.TabBarTitleColor" Value="Black" />
+        <Setter Property="Shell.TabBarUnselectedColor" Value="{StaticResource Gray900}" />
+
+    </Style>
+
+    <Style TargetType="BoxView">
+        <Setter Property="Color" Value="{StaticResource Gray200}"/>
+        <Setter Property="WidthRequest" Value="1.1" />
+        <Setter Property="Opacity" Value="0.5" />
+    </Style>
+
+</ResourceDictionary>
+
+    

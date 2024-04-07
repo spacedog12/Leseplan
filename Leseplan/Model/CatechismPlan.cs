@@ -5,7 +5,7 @@ namespace Leseplan.Model;
 public class CatechismPlan
 {
     [PrimaryKey, AutoIncrement, Column("id")]
-    public int Id { get; set; }
+    public int CatechismId { get; set; }
 
     [Column("catechism")]
     public string? CatechismPassage { get; set; }
@@ -14,6 +14,6 @@ public class CatechismPlan
     public bool CatechismRead { get; set; }
 
     [Column("dateRead")]
-    public DateOnly DateRead { get; set; }
+    public DateOnly CatechismDateRead { get; set; }
 }
 
