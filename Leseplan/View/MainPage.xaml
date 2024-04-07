@@ -1,0 +1,276 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Leseplan.View.MainPage">
+
+    <ScrollView Padding="10">
+        <VerticalStackLayout Padding="5"
+                             Spacing="20">
+            <!-- Page Image, title and subtitle -->
+            <HorizontalStackLayout>
+                <Border HorizontalOptions="Start"
+                            VerticalOptions="Start"
+                            HeightRequest="56"
+                            WidthRequest="56"
+                            StrokeShape="RoundRectangle 28" 
+                            Margin="10, 4, 4, 0">
+                    <Image Source="bible_image.jpg"
+                               HeightRequest="100"
+                               WidthRequest="100"
+                               Aspect="AspectFill"
+                               Margin="-20"/>
+
+                </Border>
+
+                <VerticalStackLayout HorizontalOptions="End"
+                                         VerticalOptions="Center">
+                    <Label Text="Wilommen beim Leseplan"
+                               HorizontalOptions="Start"
+                               VerticalOptions="End"
+                               Margin="16, 0"
+                               Style="{StaticResource LargeLabel}" />
+
+                    <Label Text="Starte deinen Weg"
+                               HorizontalOptions="Start"
+                               VerticalOptions="Start"
+                               Margin="16, 0"
+                               Style="{StaticResource MediumLabel}" />
+
+                </VerticalStackLayout>
+
+            </HorizontalStackLayout>
+
+            <!-- Bible Card -->
+            <Border Margin="5, 0"
+                    HeightRequest="215"
+                    Style="{StaticResource CardView}">
+
+                <Border.Shadow>
+                    <Shadow Brush="{StaticResource Gray900Brush}"
+                            Radius="{OnPlatform Android=13, Default=5}"
+                            Opacity="{OnPlatform Android=0.25, Default=0.15}" />
+
+                </Border.Shadow>
+
+                <!-- Todays passages-->
+                <VerticalStackLayout>
+
+                    <!-- Bible Parts Grid-->
+                    <Grid RowDefinitions="*, *, *, *, *"
+                          ColumnDefinitions="Auto, 2*">
+
+                        <Image Source="text_book_closed_fill_large.png"
+                               Grid.Row="0" Grid.Column="0" Grid.RowSpan="4"
+                               HorizontalOptions="Start"
+                               VerticalOptions="Start"
+                               Margin="15, 16, 0, 0"
+                               HeightRequest="80"
+                               WidthRequest="80" />
+
+                        <!-- Card Title -->
+                        <Label Text="Heutige Bibelstellen"
+                               Grid.Row="1" Grid.Column="1"
+                               HorizontalOptions="End"
+                               VerticalOptions="Start"
+                               HeightRequest="24"
+                               Margin="0, 0, 22, 4"
+                               Style="{StaticResource MediumLabel}" />
+
+                        <!-- First bible passage -->
+                        <Label Text="FirstBiblePassage"
+                               Grid.Row="2" Grid.Column="1"
+                               HorizontalOptions="End"
+                               HeightRequest="26"
+                               Margin="0, 0, 22, 9"
+                               Style="{StaticResource LargeLabel}" />
+
+                        <!-- Second bible passage -->
+                        <Label Text="SecondBiblePassage"
+                               Grid.Row="3" Grid.Column="1"
+                               HorizontalOptions="End"
+                               HeightRequest="26"
+                               Margin="0, 0, 22, 9"
+                               Style="{StaticResource LargeLabel}" />
+
+                        <!-- Third bible passage -->
+                        <Label Text="ThirdBiblePassage"
+                               Grid.Row="4" Grid.Column="1"
+                               HorizontalOptions="End"
+                               HeightRequest="26"
+                               Margin="0, 0, 22, 9"
+                               Style="{StaticResource LargeLabel}" />
+                    </Grid>
+
+                    <!-- Bottom Bible Card Grid -->
+                    <Grid RowDefinitions="*, *"
+                          ColumnDefinitions="*, 1, *, 1, *"
+                          HorizontalOptions="FillAndExpand"
+                          VerticalOptions="End"
+                          Margin=" 22, 10, 22, 0">
+
+                        <!-- First Column-->
+                        <Label Text="Vortschritt"
+                               Grid.Row="0" Grid.Column="0"
+                               HorizontalOptions="Start"
+                               HeightRequest="15"
+                               Style="{StaticResource MicroLabel}" />
+
+                        <Label Text="Text 1"
+                               Grid.Row="1" Grid.Column="0"
+                               HorizontalOptions="Start"
+                               Style="{StaticResource SmallLabel}" />
+
+                        <BoxView Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" />
+
+                        <!-- Second Column -->
+                        <Label Text="Verbleibende"
+                               Grid.Row="0" Grid.Column="2"
+                               HorizontalOptions="Center"
+                               HeightRequest="15"
+                               Style="{StaticResource MicroLabel}" />
+
+                        <Label Text="Text"
+                               Grid.Row="1" Grid.Column="2"
+                               HorizontalOptions="Center"
+                               Style="{StaticResource SmallLabel}"/>
+
+                        <BoxView Grid.Row="0" Grid.Column="3" Grid.RowSpan="2" />
+
+                        <!-- Third Column -->
+                        <Label Text="Status"
+                               Grid.Row="0" Grid.Column="4"
+                               HorizontalOptions="End"
+                               HeightRequest="15"
+                               Style="{StaticResource MicroLabel}" />
+
+                        <Border Grid.Row="1" Grid.Column="4"
+                                HorizontalOptions="End"
+                                VerticalOptions="Start"
+                                HeightRequest="20"
+                                WidthRequest="75"
+                                Style="{StaticResource StatusView}">
+
+                            <Label Text="Offen"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"
+                                   Style="{StaticResource SmallLabel}" />
+
+                        </Border>
+
+                    </Grid>
+
+                </VerticalStackLayout>
+
+            </Border>
+
+            <!-- Catechism Card -->
+            <Border Margin="5, 0"
+                    HeightRequest="159"
+                    Style="{StaticResource CardView}">
+
+                <Border.Shadow>
+                    <Shadow Brush="{StaticResource Gray900Brush}"
+                            Radius="{OnPlatform Android=13, Default=5}"
+                            Opacity="{OnPlatform Android=0.25, Default=0.15}" />
+
+                </Border.Shadow>
+
+                <!-- Todays passage-->
+                <VerticalStackLayout Spacing="5">
+                    <!-- Catechism parts Grid-->
+                    <Grid RowDefinitions="*, *, *"
+                          ColumnDefinitions="Auto, 2*"
+                          VerticalOptions="FillAndExpand">
+
+                        <Image Source="book_pages_fill_large.png"
+                               Grid.Row="0" Grid.Column="0" Grid.RowSpan="4"
+                               HorizontalOptions="Start"
+                               VerticalOptions="Start"
+                               Margin="15, 16, 0, 0"
+                               HeightRequest="80"
+                               WidthRequest="80" />
+
+                        <Label Text="Heutige Katechismusstelle"
+                               Grid.Row="1" Grid.Column="1"
+                               HorizontalOptions="End"
+                               VerticalOptions="Start"
+                               HeightRequest="24"
+                               Margin="0, 0, 22, 5"
+                               Style="{StaticResource MediumLabel}"/>
+
+                        <Label Text="CatechismPassage"
+                               Grid.Row="2" Grid.Column="1"
+                               HorizontalOptions="End"
+                               VerticalOptions="Start"
+                               HeightRequest="26"
+                               Margin="0, -5, 22, 10"
+                               Style="{StaticResource LargeLabel}" />
+
+                    </Grid>
+
+                    <!-- Bottom Catechism Card Grid -->
+                    <Grid RowDefinitions="*, *"
+                          ColumnDefinitions="*, 1, *, 1, *"
+                          HorizontalOptions="FillAndExpand"
+                          VerticalOptions="End"
+                          Margin=" 22, 10, 22, 0">
+
+                        <!-- First Column-->
+                        <Label Text="Vortschritt"
+                               Grid.Row="0" Grid.Column="0"
+                               HorizontalOptions="Start"
+                               HeightRequest="15"
+                               Style="{StaticResource MicroLabel}" />
+
+                        <Label Text="Text 1"
+                               Grid.Row="1" Grid.Column="0"
+                               HorizontalOptions="Start"
+                               Style="{StaticResource SmallLabel}" />
+
+                        <BoxView Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" />
+
+                        <!-- Second Column -->
+                        <Label Text="Verbleibende"
+                               Grid.Row="0" Grid.Column="2"
+                               HorizontalOptions="Center"
+                               HeightRequest="15"
+                               Style="{StaticResource MicroLabel}" />
+
+                        <Label Text="Text"
+                               Grid.Row="1" Grid.Column="2"
+                               HorizontalOptions="Center"
+                               Style="{StaticResource SmallLabel}"/>
+
+                        <BoxView Grid.Row="0" Grid.Column="3" Grid.RowSpan="2" />
+
+                        <!-- Third Column -->
+                        <Label Text="Status"
+                               Grid.Row="0" Grid.Column="4"
+                               HorizontalOptions="End"
+                               HeightRequest="15"
+                               Style="{StaticResource MicroLabel}" />
+
+                        <Border Grid.Row="1" Grid.Column="4"
+                                HorizontalOptions="End"
+                                VerticalOptions="Start"
+                                HeightRequest="20"
+                                WidthRequest="75"
+                                Style="{StaticResource StatusView}">
+
+                            <Label Text="Offen"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"
+                                   Style="{StaticResource SmallLabel}" />
+
+                        </Border>
+
+                    </Grid>
+
+                </VerticalStackLayout>
+            </Border>
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
+
+ 
