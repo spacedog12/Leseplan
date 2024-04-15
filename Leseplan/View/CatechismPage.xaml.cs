@@ -8,4 +8,12 @@ public partial class CatechismPage : ContentPage
 		BindingContext = viewModel;
 	}
 
+    // Checks if the Checkbox was triggert or changed
+    void CheckBox_CheckedChanged(System.Object sender, Microsoft.Maui.Controls.CheckedChangedEventArgs e)
+    {
+        if (sender is CheckBox checkBox && checkBox.BindingContext is CatechismPlan catechismPlan)
+        {
+            (BindingContext as CatechismViewModel)?.UpdateThisItemCommand.Execute(catechismPlan);
+        }
+    }
 }

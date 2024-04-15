@@ -47,6 +47,13 @@
 
     </Style>
 
+    <Style TargetType="Label" x:Key="LargeBoldLabel">
+        <Setter Property="FontFamily" Value="OpenSansSemibold" />
+        <Setter Property="TextColor" Value="{StaticResource LabelText}" />
+        <Setter Property="FontSize" Value="20" />
+
+    </Style>
+
     <Style TargetType="Label" x:Key="MenuHeaderLabel" BasedOn="{StaticResource BaseLabel}">
         <Setter Property="FontSize" Value="20" />
         <Setter Property="TextColor" Value="{StaticResource WhiteColor}" />
@@ -104,6 +111,12 @@
         <Setter Property="Color" Value="{StaticResource Gray200}"/>
         <Setter Property="WidthRequest" Value="1.1" />
         <Setter Property="Opacity" Value="0.5" />
+    </Style>
+
+    <Style TargetType="CheckBox">
+        <Setter Property="Color" Value="{StaticResource LabelText}" />
+
+
     </Style>
 
 </ResourceDictionary>

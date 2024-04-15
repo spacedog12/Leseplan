@@ -1,10 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Leseplan.View.MainPage">
+             xmlns:model="clr-namespace:Leseplan.Model"
+             xmlns:viewmodel="clr-namespace:Leseplan.ViewModel"
+             x:DataType="viewmodel:MainViewModel"
+             x:Class="Leseplan.View.MainPage"
+             Title="Übersicht">
 
-    <ScrollView Padding="10">
-        <VerticalStackLayout Padding="5"
+    <ScrollView >
+        <VerticalStackLayout Padding="10"
                              Spacing="20">
             <!-- Page Image, title and subtitle -->
             <HorizontalStackLayout>
@@ -198,7 +202,7 @@
                                Margin="0, 0, 22, 5"
                                Style="{StaticResource MediumLabel}"/>
 
-                        <Label Text="CatechismPassage"
+                        <Label Text="{Binding Passage.CatechismPassage}"
                                Grid.Row="2" Grid.Column="1"
                                HorizontalOptions="End"
                                VerticalOptions="Start"

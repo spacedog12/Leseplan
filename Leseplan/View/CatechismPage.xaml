@@ -1,43 +1,99 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:model="clr-namespace:Leseplan.Model"
              xmlns:viewmodel="clr-namespace:Leseplan.ViewModel"
              x:DataType="viewmodel:CatechismViewModel"
              x:Class="Leseplan.View.CatechismPage"
-             Title="CatechismPage">
+             Title="Katechismus">
 
 
     <Grid RowDefinitions="*"
-          ColumnDefinitions="*"
-          Padding="0">
+          ColumnDefinitions="*">
         <CollectionView BackgroundColor="Transparent"
                         ItemsSource="{Binding CatechismPassages}"
                         SelectionMode="None">
 
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="model:CatechismPlan">
-                    <Grid Padding="5">
-                        <Border HeightRequest="70"
+                    <Grid Padding="10, 0">
+                        <Border HeightRequest="83"
                                 Padding="0"
-                                Style="{StaticResource ListView}">
+                                Style="{StaticResource ListView}"
+                                Margin="5, 5">
+
                             <Border.Shadow>
                                 <Shadow Brush="{StaticResource Gray900Brush}"
                                         Radius="{OnPlatform Android=13, Default=5}"
                                         Opacity="{OnPlatform Android=0.25, Default=0.15}" />
 
                             </Border.Shadow>
+
+                            <!-- Card Grid -->
                             <Grid ColumnDefinitions="*, *"
                                   RowDefinitions="*, *"
-                                  Margin="20, 0, 5, 0">
-                                <Label Text="{Binding CatechismId}"
-                                       Grid.Row="0"
-                                       Grid.Column="0"/>
-                                <Label Text="{Binding CatechismPassage}"
-                                       Grid.Row="1"
-                                       Grid.Column="0"/>
-                                <Label Text="{Binding CatechismRead}"
-                                       Grid.Column="1"/>
+                                  Margin="20, 0, 20, 0">
+
+                                <!-- Title -->
+                                <HorizontalStackLayout Grid.Row="0" Grid.Column="0"
+                                                       HorizontalOptions="Start"
+                                                       VerticalOptions="Center" 
+                                                       Spacing="8"
+                                                       Margin="0, 10, 0, 0">
+
+                                    <Label Text="Passage:"
+                                           Style="{StaticResource LargeBoldLabel}"/>
+
+                                    <Label Text="{Binding CatechismPassage}"
+                                           Style="{StaticResource LargeBoldLabel}"/>
+
+                                </HorizontalStackLayout>
+
+                                <!-- Passage -->
+                                <HorizontalStackLayout Grid.Row="1"
+                                                       Grid.Column="0"
+                                                       HorizontalOptions="Start"
+                                                       VerticalOptions="Center"
+                                                       Margin="0, 0, 0, 7"
+                                                       Spacing="8">
+
+                                    <Label Text="Tag"
+                                           Style="{StaticResource SmallLabel}"/>
+
+                                    <Label Text="{Binding CatechismId}"
+                                           Style="{StaticResource SmallLabel}"/>
+
+                                </HorizontalStackLayout>
+
+                                <!-- Read -->
+                                <HorizontalStackLayout Grid.Row="1"
+                                                       Grid.Column="1"
+                                                       HorizontalOptions="End"
+                                                       VerticalOptions="Center"
+                                                       Margin="0, 0, 0, 7"
+                                                       Spacing="8">
+
+                                    <Label Text="Gelesen"
+                                           Style="{StaticResource SmallLabel}"
+                                           VerticalOptions="Center"/>
+
+                                    <CheckBox IsChecked="{Binding CatechismRead}"
+                                              CheckedChanged="CheckBox_CheckedChanged">
+                                        <CheckBox.Shadow>
+                                            <Shadow Brush="{StaticResource Gray900Brush}"
+                                                    Radius="{OnPlatform Android=13, Default=5}"
+                                                    Opacity="{OnPlatform Android=0.25, Default=0.15}" />
+                                            
+                                        </CheckBox.Shadow>
+                                        
+
+                                    </CheckBox>
+
+                                </HorizontalStackLayout>
+
+
+
 
                             </Grid>
                         </Border>
@@ -53,10 +109,10 @@
         <ActivityIndicator IsVisible="{Binding IsBusy}"
                            IsRunning="{Binding IsBusy}"
                            HeightRequest="50"
-                           HorizontalOptions="FillAndExpand"
-                           VerticalOptions="CenterAndExpand"
-                           Grid.ColumnSpan="1"
-                           Grid.RowSpan="1"/>
+                           HorizontalOptions="Fill"
+                           VerticalOptions="Center"
+                           Grid.ColumnSpan="2"
+                           Grid.RowSpan="2"/>
 
     </Grid>
 </ContentPage>

@@ -64,13 +64,10 @@ public class DatabaseRepository
         catch (Exception ex)
         {
             await Shell.Current.DisplayAlert("Database Error!", "Database couldn't be created", "OK");
-            Console.WriteLine($"Init Exception: {ex}");
+            Debug.WriteLine($"Init Exception: {ex}");
             throw;
         }
     }
-
-    List<BiblePlan> bibleList = new();
-    List<CatechismPlan> catechismList = new();
 
     // Retrieves all data from the Catechism table
     public async Task<List<CatechismPlan>?> GetCatechismPassages()
@@ -81,17 +78,84 @@ public class DatabaseRepository
         {
             var table = await db.Table<CatechismPlan>().ToListAsync();
 
-            foreach (var data in table)
+            /* foreach (var data in table)
             {
                 Console.WriteLine($"Result: {data.CatechismPassage}");
-            }
+            } */
+            Debug.WriteLine($"Catechism Table finished getting");
+
             return table;
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Exception: {ex}");
+            Debug.WriteLine($"Exception: {ex}");
         }
 
         return new List<CatechismPlan>();
+    }
+
+    // Updates the Catechism sections: catechismRead and dateRead
+    public async Task SetCatechismRead(int id)
+    {
+        await Init();
+
+        try
+        {
+            // Get's today's date
+            var dateOnly = DateOnly.FromDateTime(DateTime.UtcNow.Date);
+            var dateString = dateOnly.ToString("yyyy-MM-dd");
+            Console.WriteLine($"Date for DB: {dateString}");
+
+            // get's the passage with the spezific id
+            var query = await db.Table<CatechismPlan>()
+                .Where(i => i.CatechismId == id)
+                .FirstOrDefaultAsync();
+
+            // updates the database
+            if (query is not null)
+            {
+                // Checks if catechism is read or not and sets the value to true or false,
+                // depending the database entry.
+                if (query.CatechismRead is true)
+                {
+                    query.CatechismRead = false;
+                    query.CatechismDateRead = null;
+                }
+                else
+                {
+                    query.CatechismRead = true;
+                    query.CatechismDateRead = dateString;
+                }
+
+                await db.UpdateAsync(query);
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Exception: {ex}");
+        }
+
+    }
+
+    // Get's the next catechism passage for the MainPage
+    public async Task<CatechismPlan> GetNextUnreadCatechismPassage()
+    {
+        await Init();
+
+        try
+        {
+            var query = db.Table<CatechismPlan>()
+                .Where(p => p.CatechismRead == false)
+                .OrderBy(p => p.CatechismId)
+                .FirstOrDefaultAsync();
+
+            return await query;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Exception: {ex}");
+        }
+
+        return null;
     }
 }

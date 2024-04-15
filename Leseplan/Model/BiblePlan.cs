@@ -21,7 +21,7 @@ public class BiblePlan
     public bool BibleRead { get; set; }
 
     [Column("dateRead")]
-    public DateOnly? DateRead { get; set; }
+    public string? DateRead { get; set; }
 }
 
 

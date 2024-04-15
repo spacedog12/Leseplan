@@ -1,4 +1,7 @@
 ﻿
+using Microsoft.Maui.Controls;
+using System.Windows.Input;
+
 namespace Leseplan.Model;
 
 [Table("Catechism")]
@@ -14,6 +17,14 @@ public class CatechismPlan
     public bool CatechismRead { get; set; }
 
     [Column("dateRead")]
-    public DateOnly CatechismDateRead { get; set; }
+    public string? CatechismDateRead { get; set; }
+
+    // Is called when the checkbox in the Catechism CollectionView is changed
+    private Command? updateThisItemCommand;
+    public ICommand UpdateThisItemCommand => updateThisItemCommand ??= new Command(UpdateThisItem);
+
+    private void UpdateThisItem()
+    {
+    }
 }
 
