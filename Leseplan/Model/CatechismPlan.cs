@@ -20,11 +20,14 @@ public class CatechismPlan
     public string? CatechismDateRead { get; set; }
 
     // Is called when the checkbox in the Catechism CollectionView is changed
+    /*
     private Command? updateThisItemCommand;
     public ICommand UpdateThisItemCommand => updateThisItemCommand ??= new Command(UpdateThisItem);
 
     private void UpdateThisItem()
     {
+
     }
+    */
 }
 

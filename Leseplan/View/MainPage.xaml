@@ -259,9 +259,10 @@
                                 VerticalOptions="Start"
                                 HeightRequest="20"
                                 WidthRequest="75"
-                                Style="{StaticResource StatusView}">
+                                Style="{StaticResource StatusView}"
+                                BackgroundColor="{Binding StatusTagColor}">
 
-                            <Label Text="Offen"
+                            <Label Text="{Binding StatusIndicator}"
                                    HorizontalOptions="Center"
                                    VerticalOptions="Center"
                                    Style="{StaticResource SmallLabel}" />

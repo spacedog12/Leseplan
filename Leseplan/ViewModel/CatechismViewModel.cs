@@ -53,7 +53,7 @@ public partial class CatechismViewModel : BaseViewModel
         finally
         {
             IsBusy = false;
-            isRefreshing = false;
+            IsRefreshing = false;
         }
 
     }

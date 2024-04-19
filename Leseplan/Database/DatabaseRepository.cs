@@ -102,9 +102,7 @@ public class DatabaseRepository
         try
         {
             // Get's today's date
-            var dateOnly = DateOnly.FromDateTime(DateTime.UtcNow.Date);
-            var dateString = dateOnly.ToString("yyyy-MM-dd");
-            Console.WriteLine($"Date for DB: {dateString}");
+            string todaysDate = DatePickerHelper.GetTodaysDate();
 
             // get's the passage with the spezific id
             var query = await db.Table<CatechismPlan>()
@@ -124,7 +122,7 @@ public class DatabaseRepository
                 else
                 {
                     query.CatechismRead = true;
-                    query.CatechismDateRead = dateString;
+                    query.CatechismDateRead = todaysDate;
                 }
 
                 await db.UpdateAsync(query);
@@ -138,24 +136,34 @@ public class DatabaseRepository
     }
 
     // Get's the next catechism passage for the MainPage
-    public async Task<CatechismPlan> GetNextUnreadCatechismPassage()
+    public async Task<(CatechismPlan, CatechismPlan)> GetNextUnreadCatechismPassage()
     {
         await Init();
 
+        CatechismPlan nextQuery = null;
+        CatechismPlan previousQuery = null;
+
         try
         {
-            var query = db.Table<CatechismPlan>()
+            // Get's the next passage
+            nextQuery = await db.Table<CatechismPlan>()
                 .Where(p => p.CatechismRead == false)
-                .OrderBy(p => p.CatechismId)
+                .OrderBy(i => i.CatechismId)
                 .FirstOrDefaultAsync();
 
-            return await query;
+            if (nextQuery is not null)
+            {
+                previousQuery = await db.Table<CatechismPlan>()
+                .Where(p => p.CatechismId < nextQuery.CatechismId)
+                .OrderByDescending(i => i.CatechismId)
+                .FirstOrDefaultAsync();
+            }
         }
         catch (Exception ex)
         {
             Debug.WriteLine($"Exception: {ex}");
         }
 
-        return null;
+        return (nextQuery, previousQuery);
     }
 }

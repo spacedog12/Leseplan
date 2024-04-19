@@ -8,7 +8,7 @@ public partial class MainPage : ContentPage
 		BindingContext = viewModel;
 
 		// Refreshes the View when reopened
-		this.Appearing += async (sender, e) => await viewModel.RefreshMainViewData();
+		this.Appearing += async (sender, e) => await viewModel.OnAppearing();
 	}
 
 	
