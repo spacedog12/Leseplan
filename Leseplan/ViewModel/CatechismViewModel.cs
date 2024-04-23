@@ -12,11 +12,16 @@ public partial class CatechismViewModel : BaseViewModel
     {
         this.dbRepo = dbRepo;
         UpdateThisItemCommand = new RelayCommand<CatechismPlan>(async (plan) => await SetCatechismReadPassageAsync(plan));
-        _ = GetCatechismPassagesAsync();
+        // _ = GetCatechismPassagesAsync();
     }
 
     [ObservableProperty]
     bool isRefreshing;
+
+    public async Task OnAppearing()
+    {
+        await GetCatechismPassagesAsync();
+    }
 
     [RelayCommand]
     async Task GetCatechismPassagesAsync()

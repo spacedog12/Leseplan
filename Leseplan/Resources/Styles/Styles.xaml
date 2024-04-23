@@ -93,6 +93,16 @@
 
     </Style>
 
+    <Style TargetType="Border" x:Key="Popup" BasedOn="{StaticResource BaseBorder}">
+        <Setter Property="StrokeThickness" Value="{OnPlatform Android=0.5, Default=0.1}" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 20" />
+
+        <Setter Property="Shadow.Brush" Value="{StaticResource Gray900Brush}" />
+        <Setter Property="Shadow.Radius" Value="5" />
+        <Setter Property="Shadow.Opacity" Value=".1" />
+
+    </Style>
+
     <Style TargetType="Shell" ApplyToDerivedTypes="True">
         <Setter Property="Shell.BackgroundColor" Value="{StaticResource Primary}" />
         <Setter Property="Shell.ForegroundColor" Value="{StaticResource WhiteColor}" />
@@ -115,8 +125,6 @@
 
     <Style TargetType="CheckBox">
         <Setter Property="Color" Value="{StaticResource LabelText}" />
-
-
     </Style>
 
 </ResourceDictionary>

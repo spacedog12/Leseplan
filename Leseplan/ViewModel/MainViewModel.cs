@@ -1,45 +1,50 @@
-﻿namespace Leseplan.ViewModel;
+﻿using Microsoft.Maui.Controls;
+
+namespace Leseplan.ViewModel;
 
 public partial class MainViewModel : BaseViewModel
 {
-	DatabaseRepository dbRepo;
+    DatabaseRepository dbRepo;
+    ReadTagSetterHelper readTagSetterHelper;
 
-	public MainViewModel(DatabaseRepository dbRepo)
-	{
-		this.dbRepo = dbRepo;
-	}
+    public MainViewModel(DatabaseRepository dbRepo)
+    {
+        this.dbRepo = dbRepo;
+        readTagSetterHelper = new ReadTagSetterHelper();
+    }
 
-	[ObservableProperty]
-	CatechismPlan passage;
+    // Properties for the CatechismCard
+    [ObservableProperty]
+    CatechismPlan catechismPassage;
+    
+    [ObservableProperty]
+    string catechismStatusIndicator = "Offen";
 
-	[ObservableProperty]
-	string statusIndicator = "Offen";
+    [ObservableProperty]
+    Color catechismStatusTagColor;
 
-	[ObservableProperty]
-	Color statusTagColor;
+    // Refreshes the Views
+    public async Task OnAppearing()
+    {
+        await GetNextUnreadCatechismPassageAsync();
+    }
 
-	// Refreshes the Views
-	public async Task OnAppearing()
-	{
-		await GetNextUnreadCatechismPassageAsync();
-	}
-
-	[RelayCommand]
-	async Task GetNextUnreadCatechismPassageAsync()
-	{
-		if (IsBusy)
-			return;
+    [RelayCommand]
+    async Task GetNextUnreadCatechismPassageAsync()
+    {
+        if (IsBusy)
+            return;
 
         try
-		{
-			Console.WriteLine($"Start getting next CatechismPassage");
+        {
+            Console.WriteLine($"Start getting next CatechismPassage");
             IsBusy = true;
 
-			// gets the next passage
-			(CatechismPlan nextPassage, CatechismPlan previousPassage) = await dbRepo.GetNextUnreadCatechismPassage();
+            // gets the next passage
+            (CatechismPlan nextPassage, CatechismPlan previousPassage) = await dbRepo.GetNextUnreadCatechismPassage();
 
             // Checks which Data to pick
-            if(nextPassage is null)
+            if (nextPassage is null)
             {
                 Debug.WriteLine($"The data is up to date!");
                 return;
@@ -47,24 +52,28 @@ public partial class MainViewModel : BaseViewModel
 
             bool catRead = false;
 
-            if (Passage is null && previousPassage is null)
+            if (CatechismPassage is null && previousPassage is null)
             {
-                Passage = nextPassage;
+                CatechismPassage = nextPassage;
                 catRead = nextPassage.CatechismRead;
             }
-            else if (Passage is null || (previousPassage is not null && previousPassage.CatechismDateRead.Equals(DatePickerHelper.GetTodaysDate())))
+            else if (CatechismPassage is null || (previousPassage is not null && previousPassage.CatechismDateRead.Equals(DatePickerHelper.GetTodaysDate())))
             {
-                Passage = previousPassage;
+                CatechismPassage = previousPassage;
                 catRead = previousPassage.CatechismRead;
             }
             else
             {
-                Passage = nextPassage;
+                CatechismPassage = nextPassage;
                 catRead = nextPassage.CatechismRead;
             }
 
-            SetReadTag(catRead);
-            Debug.WriteLine($"Read status of {(Passage == previousPassage ? "previous" : "next")} Passage: {catRead}");
+            Debug.WriteLine("Before updating: " + CatechismStatusIndicator + ", " + CatechismStatusTagColor);
+            CatechismStatusIndicator = readTagSetterHelper.GetStatusIndicator(catRead);
+            CatechismStatusTagColor = readTagSetterHelper.GetStatusTagColor(catRead);
+            Debug.WriteLine("After updating: " + CatechismStatusIndicator + ", " + CatechismStatusTagColor);
+
+            Debug.WriteLine($"Read status of {(CatechismPassage == previousPassage ? "previous" : "next")} Passage: {catRead}");
 
             /*
 
@@ -111,50 +120,33 @@ public partial class MainViewModel : BaseViewModel
             }
             */
         }
-		catch (Exception ex)
-		{
+        catch (Exception ex)
+        {
             Debug.WriteLine($"Exception: {ex}");
         }
-		finally
-		{
-			IsBusy = false;
-		}
-	}
-
-    [RelayCommand]
-    async Task GoToCatechismPopupAsync()
-    {
-
+        finally
+        {
+            IsBusy = false;
+        }
     }
 
-	// Sets the Read Tag
-	private void SetReadTag(bool catRead)
-	{
-        // Sets the State for the View
-        if (catRead)
-        {
-            StatusIndicator = "Gelesen";
+    [RelayCommand]
+    async Task GoToCatechismPopupAsync(CatechismPlan catechismPlan)
+    {
 
-            // Gets the Color out of the Colors.xaml file
-            if (App.Current.Resources.TryGetValue("ReadTag", out var colorvalue))
-                StatusTagColor = (Color)colorvalue;
+        if (catechismPlan is null)
+            return;
 
-            Debug.WriteLine($"Open status of View: {StatusIndicator}");
-            Debug.WriteLine($"Color for StatusTagColor: {StatusTagColor}");
-        }
-        else
-        {
-            StatusIndicator = "Offen";
+        // Opens the Popup for Catechism
+        await Shell.Current.GoToAsync($"{nameof(PopupCatechismPage)}", true,
+            new Dictionary<string, object>
+            {
+                    {"CatechismPlan", catechismPlan}
+            });
 
-            // Gets the Color out of the Colors.xaml file
-            if (App.Current.Resources.TryGetValue("OpenTag", out var colorvalue))
-                StatusTagColor = (Color)colorvalue;
+        // TODO: Need to find out, how to Implement the PushModalAsync so that i can pass data
+        // await Shell.Current.Navigation.PushModalAsync(new PopupCatechismPage(new PopupCatechismViewModel()), true);
 
-            Debug.WriteLine($"Read status of View: {StatusIndicator}");
-            Debug.WriteLine($"Color for StatusTagColor: {StatusTagColor}");
-        }
-
-        Debug.WriteLine($"Next Catechism Passage: {Passage.CatechismPassage}");
     }
 }
 

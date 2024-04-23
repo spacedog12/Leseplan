@@ -154,6 +154,13 @@
                                 WidthRequest="75"
                                 Style="{StaticResource StatusView}">
 
+                            <Border.Shadow>
+                                <Shadow Brush="{StaticResource Gray900Brush}"
+                                        Radius="{OnPlatform Android=13, Default=5}"
+                                        Opacity="{OnPlatform Android=0.25, Default=0.15}" />
+
+                            </Border.Shadow>
+
                             <Label Text="Offen"
                                    HorizontalOptions="Center"
                                    VerticalOptions="Center"
@@ -170,7 +177,7 @@
             <!-- Catechism Card -->
             <Border Margin="5, 0"
                     HeightRequest="159"
-                    Style="{StaticResource CardView}">
+                    Style="{StaticResource CardView}" >
 
                 <Border.Shadow>
                     <Shadow Brush="{StaticResource Gray900Brush}"
@@ -178,6 +185,12 @@
                             Opacity="{OnPlatform Android=0.25, Default=0.15}" />
 
                 </Border.Shadow>
+
+
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer CommandParameter="{Binding CatechismPassage}"
+                                          Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainViewModel}}, Path=GoToCatechismPopupCommand}" />
+                </Border.GestureRecognizers>
 
                 <!-- Todays passage-->
                 <VerticalStackLayout Spacing="5">
@@ -202,7 +215,7 @@
                                Margin="0, 0, 22, 5"
                                Style="{StaticResource MediumLabel}"/>
 
-                        <Label Text="{Binding Passage.CatechismPassage}"
+                        <Label Text="{Binding CatechismPassage.CatechismPassage}"
                                Grid.Row="2" Grid.Column="1"
                                HorizontalOptions="End"
                                VerticalOptions="Start"
@@ -260,9 +273,16 @@
                                 HeightRequest="20"
                                 WidthRequest="75"
                                 Style="{StaticResource StatusView}"
-                                BackgroundColor="{Binding StatusTagColor}">
+                                BackgroundColor="{Binding CatechismStatusTagColor}">
 
-                            <Label Text="{Binding StatusIndicator}"
+                            <Border.Shadow>
+                                <Shadow Brush="{StaticResource Gray900Brush}"
+                                        Radius="{OnPlatform Android=13, Default=5}"
+                                        Opacity="{OnPlatform Android=0.25, Default=0.15}" />
+
+                            </Border.Shadow>
+
+                            <Label Text="{Binding CatechismStatusIndicator}"
                                    HorizontalOptions="Center"
                                    VerticalOptions="Center"
                                    Style="{StaticResource SmallLabel}" />

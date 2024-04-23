@@ -8,6 +8,16 @@ public partial class CatechismPage : ContentPage
 		BindingContext = viewModel;
 	}
 
+    protected override void OnNavigatedTo(NavigatedToEventArgs args)
+    {
+        base.OnNavigatedTo(args);
+
+        if (BindingContext is CatechismViewModel viewModel)
+        {
+            viewModel.OnAppearing();
+        }
+    }
+
     // Checks if the Checkbox was triggert or changed
     void CheckBox_CheckedChanged(System.Object sender, Microsoft.Maui.Controls.CheckedChangedEventArgs e)
     {

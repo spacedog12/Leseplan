@@ -19,6 +19,8 @@
 
     <Color x:Key="CardBackground">White</Color>
     <Color x:Key="CardBackgroundDark">#030303</Color>
+    <!-- <Color x:Key="PopupBackground">#aa000000</Color> -->
+    <Color x:Key="PopupBackground">White</Color>
 
     <Color x:Key="Gray100">#E1E1E1</Color>
     <Color x:Key="Gray200">#C8C8C8</Color>

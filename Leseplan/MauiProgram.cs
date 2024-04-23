@@ -12,22 +12,22 @@ public static class MauiProgram
 		var builder = MauiApp.CreateBuilder();
 		builder
 			.UseMauiApp<App>()
-            .UseMauiCommunityToolkit()
+			.UseMauiCommunityToolkit()
 			/*
 			 * Rainbows debuger, only enable to Debug
-			 */ 
+			 */
 			// .UseDebugRainbows()
-            .ConfigureFonts(fonts =>
+			.ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("OpenSans-Light.ttf", "OpenSansLight");
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 				fonts.AddFont("Montserrat-VariableFont-wght.ttf", "Montserrat");
-                fonts.AddFont("NanumGothic-Bold.ttf", "Gothic");
+				fonts.AddFont("NanumGothic-Bold.ttf", "Gothic");
 			});
 
 #if DEBUG
-        builder.Logging.AddDebug();
+		builder.Logging.AddDebug();
 #endif
 		builder.Services.AddSingleton<MainPage>();
 		builder.Services.AddSingleton<MainViewModel>();
@@ -37,9 +37,14 @@ public static class MauiProgram
 		builder.Services.AddSingleton<CatechismPage>();
 		builder.Services.AddSingleton<CatechismViewModel>();
 
+		builder.Services.AddTransient<PopupCatechismPage>();
+		builder.Services.AddTransient<PopupCatechismViewModel>();
+
 		builder.Services.AddSingleton<SettingsPage>();
 
 		builder.Services.AddSingleton<DatabaseRepository>();
+
+
 
 
 		return builder.Build();
