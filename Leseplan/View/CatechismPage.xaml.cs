@@ -8,13 +8,13 @@ public partial class CatechismPage : ContentPage
 		BindingContext = viewModel;
 	}
 
-    protected override void OnNavigatedTo(NavigatedToEventArgs args)
+    protected override async void OnNavigatedTo(NavigatedToEventArgs args)
     {
         base.OnNavigatedTo(args);
 
         if (BindingContext is CatechismViewModel viewModel)
         {
-            viewModel.OnAppearing();
+            await viewModel.OnAppearing();
         }
     }
 
@@ -24,6 +24,16 @@ public partial class CatechismPage : ContentPage
         if (sender is CheckBox checkBox && checkBox.BindingContext is CatechismPlan catechismPlan)
         {
             (BindingContext as CatechismViewModel)?.UpdateThisItemCommand.Execute(catechismPlan);
+        }
+    }
+
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+
+        if (BindingContext is CatechismViewModel viewModel)
+        {
+            viewModel.Dispose();
         }
     }
 }

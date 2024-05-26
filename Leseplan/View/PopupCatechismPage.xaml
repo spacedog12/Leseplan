@@ -33,7 +33,6 @@
                        HeightRequest="80"
                        WidthRequest="80"/>
 
-
                 <Grid RowDefinitions="*, *"
                       ColumnDefinitions="*, *"
                       Margin="0, 20, 0, 0">
@@ -58,7 +57,7 @@
 
                     <!-- Read Tag -->
                     <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
-                            Margin="0, 20, 0, 5"
+                            Margin="0, 20, 0, 0"
                             HorizontalOptions="Center"
                             VerticalOptions="Start"
                             HeightRequest="40"

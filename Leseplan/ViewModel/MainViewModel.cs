@@ -74,51 +74,6 @@ public partial class MainViewModel : BaseViewModel
             Debug.WriteLine("After updating: " + CatechismStatusIndicator + ", " + CatechismStatusTagColor);
 
             Debug.WriteLine($"Read status of {(CatechismPassage == previousPassage ? "previous" : "next")} Passage: {catRead}");
-
-            /*
-
-            // checks if it is the first passage, or if the passage is empty
-            if (Passage is null && previousPassage is null && nextPassage?.CatechismDateRead is null)
-            {
-                Passage = nextPassage;
-                catRead = nextPassage.CatechismRead;
-                SetReadTag(catRead);
-                Debug.WriteLine($"Read status of next Passage: {catRead}");
-            }
-            else if (Passage is null && previousPassage is not null && previousPassage.CatechismDateRead.Equals(DatePickerHelper.GetTodaysDate()))
-            {
-                Passage = previousPassage;
-                catRead = previousPassage.CatechismRead;
-                SetReadTag(catRead);
-                Debug.WriteLine($"Read status of previous Passage: {catRead}");
-            }
-            else if (Passage is not null && previousPassage is not null && previousPassage.CatechismDateRead.Equals(DatePickerHelper.GetTodaysDate()))
-            {
-                Passage = previousPassage;
-                catRead = previousPassage.CatechismRead;
-                SetReadTag(catRead);
-                Debug.WriteLine($"Read status of previous Passage: {catRead}");
-            }
-            else if (Passage is not null && previousPassage is not null && !previousPassage.CatechismDateRead.Equals(DatePickerHelper.GetTodaysDate()))
-            {
-                Passage = nextPassage;
-                catRead = nextPassage.CatechismRead;
-                SetReadTag(catRead);
-                Debug.WriteLine($"Read status of next Passage: {catRead}");
-            }
-            else if (Passage is null && previousPassage is not null && !previousPassage.CatechismDateRead.Equals(DatePickerHelper.GetTodaysDate()))
-            {
-                Passage = nextPassage;
-                catRead = nextPassage.CatechismRead;
-                SetReadTag(catRead);
-                Debug.WriteLine($"Read status of next Passage: {catRead}");
-            }
-            else
-            {
-                Debug.WriteLine($"The data is up to date!");
-                return;
-            }
-            */
         }
         catch (Exception ex)
         {

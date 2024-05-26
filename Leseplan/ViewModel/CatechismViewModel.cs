@@ -3,16 +3,15 @@
 public partial class CatechismViewModel : BaseViewModel
 {
     DatabaseRepository dbRepo;
+    private bool disposed = false;
 
-    public ObservableCollection<CatechismPlan> CatechismPassages { get; } = new();
-
+    public ObservableCollection<CatechismPlan> CatechismPassages { get; set; } = [];
     public RelayCommand<CatechismPlan> UpdateThisItemCommand { get; }
 
     public CatechismViewModel(DatabaseRepository dbRepo)
     {
         this.dbRepo = dbRepo;
-        UpdateThisItemCommand = new RelayCommand<CatechismPlan>(async (plan) => await SetCatechismReadPassageAsync(plan));
-        // _ = GetCatechismPassagesAsync();
+        UpdateThisItemCommand = new RelayCommand<CatechismPlan>(async (plan) => await SetCatechismPassageReadAsync(plan));
     }
 
     [ObservableProperty]
@@ -34,8 +33,6 @@ public partial class CatechismViewModel : BaseViewModel
             Debug.WriteLine($"Start adding Catechism passages to ObservableCollection");
 
             IsBusy = true;
-            // await Task.Delay(2000);
-
             var passages = await dbRepo.GetCatechismPassages();
 
             if (CatechismPassages.Count != 0)
@@ -47,7 +44,6 @@ public partial class CatechismViewModel : BaseViewModel
             }
 
             Debug.WriteLine($"Catechism added to ObservableCollection");
-
         }
         catch (Exception ex)
         {
@@ -64,7 +60,7 @@ public partial class CatechismViewModel : BaseViewModel
     }
 
     [RelayCommand]
-    async Task SetCatechismReadPassageAsync(CatechismPlan plan)
+    async Task SetCatechismPassageReadAsync(CatechismPlan plan)
     {
         if (IsBusy)
             return;
@@ -84,17 +80,33 @@ public partial class CatechismViewModel : BaseViewModel
         finally
         {
             IsBusy = false;
-
-            /*
-            if (CatechismPassages.Count != 0)
-                CatechismPassages.Clear();
-
-            await GetCatechismPassagesAsync();
-            */
         }
 
     }
 
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
 
+    public virtual void Dispose(bool disposing)
+    {
+        if (!disposed)
+        {
+            if (disposing)
+            {
+                dbRepo?.Dispose();
+                CatechismPassages?.Clear();
+            }
+
+            disposed = true;
+        }
+    }
+
+    ~CatechismViewModel()
+    {
+        Dispose(false);
+    }
 }
 

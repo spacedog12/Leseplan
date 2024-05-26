@@ -37,54 +37,10 @@ public partial class PopupCatechismPage : ContentPage
 
     private void CheckBox_CheckedChanged(object sender, CheckedChangedEventArgs e)
     {
-        if (BindingContext is PopupCatechismViewModel viewModel)
+        if (sender is CheckBox checkBox && checkBox.BindingContext is PopupCatechismViewModel viewModel)
         {
             Debug.WriteLine($"Checkbox Changed to: {e.Value}");
             viewModel.HandleCheckboxChange();
         }
     }
-
-    /*
-    void CheckBox_CheckedChanged_PopupCatechism(System.Object sender, Microsoft.Maui.Controls.CheckedChangedEventArgs e)
-    {
-        /*
-        if (sender is CheckBox checkBox && checkBox.BindingContext is PopupCatechismViewModel viewModel)
-        {
-            viewModel.HandleCheckboxChange();
-            // (BindingContext as PopupCatechismViewModel)?.UpdateThisItemCommand.Execute(catechismPlan);
-        }
-        */
-
-        /*
-        if (sender is CheckBox checkBox)
-        {
-            if (checkBox.BindingContext is PopupCatechismViewModel viewModel)
-            {
-                Debug.WriteLine($"Checkbox changed: {viewModel}");
-                viewModel.HandleCheckboxChange();
-            }
-            else
-            {
-                Debug.WriteLine("Checkbox changed, but binding context is not a viewModel.");
-            }
-        }*/
-        /*
-        if (sender is CheckBox checkBox)
-        {
-            Debug.WriteLine($"Checkbox changed. BindingContext type: {checkBox.BindingContext.GetType()}");
-
-            if (checkBox.BindingContext is PopupCatechismViewModel viewModel)
-            {
-                Debug.WriteLine($"Checkbox changed: {viewModel.CatechismPlan.CatechismRead}");
-                viewModel.HandleCheckboxChange();
-            }
-            else
-            {
-                Debug.WriteLine("Checkbox changed, but binding context is not a PopupCatechismViewModel.");
-            }
-        }
-
-    }
-    */
-
 }

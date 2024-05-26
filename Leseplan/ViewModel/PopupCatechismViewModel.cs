@@ -1,14 +1,10 @@
-﻿using System.Numerics;
-
-namespace Leseplan.ViewModel;
+﻿namespace Leseplan.ViewModel;
 
 [QueryProperty(nameof(CatechismPlan), "CatechismPlan")]
 public partial class PopupCatechismViewModel : BaseViewModel
 {
 	DatabaseRepository dbRepo;
 	ReadTagSetterHelper readTagSetterHelper;
-
-	public RelayCommand<CatechismPlan> UpdateThisItemCommand { get; }
 
 	public PopupCatechismViewModel(DatabaseRepository dbRepo)
 	{
@@ -37,13 +33,13 @@ public partial class PopupCatechismViewModel : BaseViewModel
 
 			// Updates the Database Repository
 			await dbRepo.SetCatechismRead(CatechismPlan.CatechismId);
-			Debug.WriteLine($"Updated catechism {CatechismPlan.CatechismRead}");
+			Console.WriteLine($"Updated catechism {CatechismPlan.CatechismRead}");
 			SetStatusIndicatorColorAndText();
 		}
 		catch (Exception ex)
 		{
 
-			Debug.WriteLine($"Exception: {ex}");
+			Console.WriteLine($"Exception: {ex}");
 		}
 		finally
 		{
@@ -56,7 +52,7 @@ public partial class PopupCatechismViewModel : BaseViewModel
 	{
 		if (CatechismPlan is null)
 		{
-			Debug.WriteLine("CatechismPlan is null");
+			Console.WriteLine("CatechismPlan is null");
 			return;
 		}
 
@@ -64,33 +60,31 @@ public partial class PopupCatechismViewModel : BaseViewModel
 		{
 			IsBusy = true;
 
-			Debug.WriteLine($"Passage Status: {CatechismPlan.CatechismRead}");
+			Console.WriteLine($"Passage Status: {CatechismPlan.CatechismRead}");
 			// gets the state of the passage
 			bool catRead = CatechismPlan.CatechismRead;
 
 			// sets the Color and Text for the Passag read tag
-			Debug.WriteLine("Before updating: " + StatusIndicator + ", " + StatusTagColor);
+			Console.WriteLine("Before updating: " + StatusIndicator + ", " + StatusTagColor);
 			StatusIndicator = readTagSetterHelper.GetStatusIndicator(catRead);
 			StatusTagColor = readTagSetterHelper.GetStatusTagColor(catRead);
-			Debug.WriteLine("After updating: " + StatusIndicator + ", " + StatusTagColor);
+			Console.WriteLine("After updating: " + StatusIndicator + ", " + StatusTagColor);
 		}
 		catch (Exception ex)
 		{
-			Debug.WriteLine($"Exception: {ex}");
+			Console.WriteLine($"Exception: {ex}");
 		}
 		finally
 		{
 			IsBusy = false;
 		}
-
-
 	}
 
 	public async void HandleCheckboxChange()
 	{
 		if (CatechismPlan is null)
 		{
-			Debug.WriteLine($"CatechismPlan is null");
+			Console.WriteLine($"CatechismPlan is null");
 			return;
 		}
 

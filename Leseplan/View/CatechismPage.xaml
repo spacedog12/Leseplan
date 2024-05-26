@@ -18,6 +18,8 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="model:CatechismPlan">
                     <Grid Padding="10, 0">
+                    
+                        <!-- Border -->
                         <Border HeightRequest="83"
                                 Padding="0"
                                 Style="{StaticResource ListView}"
@@ -78,15 +80,18 @@
                                            Style="{StaticResource SmallLabel}"
                                            VerticalOptions="Center"/>
 
+                                    
                                     <CheckBox IsChecked="{Binding CatechismRead}"
                                               CheckedChanged="CheckBox_CheckedChanged">
+
+                                        <!--
                                         <CheckBox.Shadow>
                                             <Shadow Brush="{StaticResource Gray900Brush}"
                                                     Radius="{OnPlatform Android=13, Default=5}"
                                                     Opacity="{OnPlatform Android=0.25, Default=0.15}" />
                                             
                                         </CheckBox.Shadow>
-                                        
+                                        -->
 
                                     </CheckBox>
 

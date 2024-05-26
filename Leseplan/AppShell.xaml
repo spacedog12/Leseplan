@@ -38,12 +38,20 @@
     </FlyoutItem>
 
     <!-- BiblePage -->
-    <FlyoutItem Title="Bibel"
-                Icon="text_book_closed_fill_large.png">
-        <ShellContent Title="Bibel"
-                      ContentTemplate="{DataTemplate local:BiblePage}"
-                      Route="BiblePage"/>
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems" >
 
+        <Tab Title="Bibel"
+              Icon="text_book_closed_fill_large.png">
+
+            <ShellContent Title="Altes Testament"
+                      ContentTemplate="{DataTemplate local:BibleATPage}"
+                      Route="BibleATPage"/>
+
+            <ShellContent Title="Neues Testament"
+                            ContentTemplate="{DataTemplate local:BibleNTPage}"
+                            Route="BibleNTPage" />
+        </Tab>
+        
     </FlyoutItem>
 
     <!-- CatechismPage -->
