@@ -5,7 +5,11 @@ global using CommunityToolkit.Mvvm.Input;
 
 // Markup
 global using CommunityToolkit.Maui.Markup;
+<<<<<<< HEAD
 global using static CommunityToolkit.Maui.Markup.GridRowsColumns;
+=======
+global  using static CommunityToolkit.Maui.Markup.GridRowsColumns;
+>>>>>>> origin/main
 
 // System
 global using System;
