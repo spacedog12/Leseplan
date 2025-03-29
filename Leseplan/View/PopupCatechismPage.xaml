@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Leseplan.View.PopupCatechismPage"
+             xmlns:viewmodel="clr-namespace:Leseplan.ViewModel"
+             x:DataType="viewmodel:PopupCatechismViewModel"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             ios:Page.ModalPresentationStyle="OverFullScreen"
+             BackgroundColor="{StaticResource PopupBackground}">
+
+    <VerticalStackLayout Padding="20">
+        <Border VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Style="{StaticResource Popup}"
+                Padding="22, 19"
+                WidthRequest="360">
+
+            <Border.Shadow>
+                <Shadow Brush="{StaticResource Gray900Brush}"
+                        Radius="{OnPlatform Android=13, Default=5}"
+                        Opacity="{OnPlatform Android=0.25, Default=0.15}" />
+
+            </Border.Shadow>
+
+            <VerticalStackLayout>
+                <Label Text="Heutige Katechismusstelle"
+                       Style="{StaticResource MediumLabel}"
+                       Margin="0, 0, 0, 7"/>
+
+                <Image Source="book_pages_fill_large.png"
+                       HorizontalOptions="Start"
+                       Margin="-10, 0, 0, 0"
+                       HeightRequest="80"
+                       WidthRequest="80"/>
+
+                <Grid RowDefinitions="*, *"
+                      ColumnDefinitions="*, *"
+                      Margin="0, 20, 0, 0">
+
+                    <!-- Passage -->
+                    <Label Text="{Binding CatechismPlan.CatechismPassage}"
+                               Grid.Column="0"
+                               Style="{StaticResource LargeLabel}"
+                               HorizontalOptions="Start"/>
+
+                    <CheckBox IsChecked="{Binding CatechismPlan.CatechismRead}"
+                              x:Name="PopupCatechismCheckBox"
+                              Grid.Column="1"
+                              HorizontalOptions="End">
+                        <CheckBox.Shadow>
+                            <Shadow Brush="{StaticResource Gray900Brush}"
+                                    Radius="{OnPlatform Android=13, Default=5}"
+                                    Opacity="{OnPlatform Android=0.25, Default=0.15}" />
+
+                        </CheckBox.Shadow>
+                    </CheckBox>
+
+                    <!-- Read Tag -->
+                    <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                            Margin="0, 20, 0, 0"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Start"
+                            HeightRequest="40"
+                            WidthRequest="289"
+                            Style="{StaticResource StatusView}"
+                            BackgroundColor="{Binding StatusTagColor}">
+
+                        <Border.Shadow>
+                            <Shadow Brush="{StaticResource Gray900Brush}"
+                                    Radius="{OnPlatform Android=13, Default=5}"
+                                    Opacity="{OnPlatform Android=0.25, Default=0.15}" />
+
+                        </Border.Shadow>
+
+                        <Label Text="{Binding StatusIndicator}"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"
+                               Style="{StaticResource LargeLabel}" />
+
+                    </Border>
+                </Grid>
+
+
+
+
+            </VerticalStackLayout>
+
+            <!--
+            <Grid RowDefinitions="*, *, *, *, *, *"
+                  ColumnDefinitions="2*, *">
+                <Label Text="Heutige Katechismusstelle"
+                       Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                       Style="{StaticResource LargeLabel}"/>
+
+                <Image Source="book_pages_fill_large.png"
+                       Grid.Row="1" Grid.Column="0" Grid.RowSpan="2"
+                       HorizontalOptions="Start"
+                       Margin="-10, 16, 0, 0"
+                       HeightRequest="80"
+                       WidthRequest="80"/>
+
+                <Label Text="Genesis 1 - 3"
+                       Grid.Row="3" Grid.Column="0"
+                       />
+
+            </Grid>
+            -->
+        </Border>
+    </VerticalStackLayout>
+</ContentPage>
