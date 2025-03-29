@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:Leseplan.Model"
+             xmlns:viewmodel="clr-namespace:Leseplan.ViewModel"
+             x:DataType="viewmodel:BibleViewModel"
+             x:Class="Leseplan.View.BibleNTPage"
+             Title="Bibel">
+            
+
+   <Grid RowDefinitions="*"
+        ColumnDefinitions="*">
+
+        <CollectionView Grid.Row="0"
+                        Grid.Column="0"
+                        BackgroundColor="Transparent"
+                        ItemsSource="{Binding TestamentBooks}"
+                        SelectionMode="None">
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:BiblePlan">
+                    <Grid Padding="10, 0">
+                
+                        <!-- Border -->
+                        <Border HeightRequest="65"
+                                Padding="20 ,0"
+                                Style="{StaticResource ListView}"
+                                Margin="5, 10, 5, 0">
+                            
+                            <Border.Shadow>
+                                <Shadow Brush="{StaticResource Gray900Brush}"
+                                        Radius="{OnPlatform Android=13, Default=5}"
+                                        Opacity="{OnPlatform Android=0.25, Default=0.15}" />
+
+                            </Border.Shadow>
+
+                            <Border.GestureRecognizers>
+                                            <TapGestureRecognizer CommandParameter="{Binding .}"
+                                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:BibleViewModel}}, Path=GoToBibleDetailPageCommand}"/>
+                                        </Border.GestureRecognizers>
+
+                            <!--- Grid for Card Details -->
+                            <Grid ColumnDefinitions="2*, *">
+                            
+                                <!-- Label -->
+                                <Label Text="{Binding BibleBooks}"
+                                        Style="{StaticResource LargeBoldLabel}" 
+                                        VerticalOptions="Center"/> 
+
+                                <HorizontalStackLayout Grid.Column="1"
+                                                        HorizontalOptions="End">
+                                    <!-- Read Tag -->
+                                    <Border HorizontalOptions="End"
+                                            VerticalOptions="Center"
+                                            HeightRequest="20"
+                                            WidthRequest="75"
+                                            Margin="0, 0, 15, 0"
+                                            Style="{StaticResource StatusView}"
+                                            IsVisible="False">
+
+                                        <Border.Shadow>
+                                            <Shadow Brush="{StaticResource Gray900Brush}"
+                                                    Radius="{OnPlatform Android=13, Default=5}"
+                                                    Opacity="{OnPlatform Android=0.25, Default=0.15}" />
+
+                                        </Border.Shadow>
+
+                                        <!-- Read Label -->
+                                        <Label Text="Offen"
+                                                HorizontalOptions="Center"
+                                                VerticalOptions="Center"
+                                                Style="{StaticResource SmallLabel}" />
+
+                                    </Border>
+
+                                    <Image Source="right_arrow_triangle.png"
+                                        HorizontalOptions="End"
+                                        HeightRequest="15"
+                                        WidthRequest="15" />
+                            
+                                </HorizontalStackLayout>  
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        
+        <ActivityIndicator Grid.Row="0"
+                            Grid.Column="0"
+                            IsVisible="{Binding IsBusy}"
+                            IsRunning="{Binding IsBusy}"
+                            HeightRequest="50"
+                            HorizontalOptions="Fill"
+                            VerticalOptions="Center"
+                            Grid.ColumnSpan="2"
+                            Grid.RowSpan="2"/>
+
+    </Grid>
+</ContentPage>
